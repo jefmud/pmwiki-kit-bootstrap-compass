@@ -1,0 +1,27 @@
+version=pmwiki-2.2.45 ordered=1 urlencoded=1
+agent=Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.4 (KHTML, like Gecko) Ubuntu/12.10 Chromium/22.0.1229.94 Chrome/22.0.1229.94 Safari/537.4
+author=gambhiro
+charset=UTF-8
+csum=
+host=127.0.0.1
+name=Site.SideBar
+passwdedit=@_site_edit
+rev=5
+targets=Main.HomePage,Main.WikiSandbox,PmWiki.PmWiki,PmWiki.InitialSetupTasks,PmWiki.BasicEditing,PmWiki.DocumentationIndex,PmWiki.FAQ,PmWiki.PmWikiPhilosophy,PmWiki.ReleaseNotes,PmWiki.ChangeLog,PmWiki.MailingLists,Site.SideBar
+text=* [[Main/HomePage]]%25list class="nav nav-list"%25%25item class=active%25%0a* [[Main/WikiSandbox]]%0a%0a* [[PmWiki/PmWiki]]%25item class=nav-header%25%25list class="nav nav-list"%25%0a* [[PmWiki/Initial Setup Tasks]]  %0a* [[PmWiki/Basic Editing]]%0a* [[PmWiki/Documentation Index]]%0a* [[PmWiki/FAQ | PmWiki FAQ ]]%0a* [[PmWiki/PmWikiPhilosophy]]%0a* [[PmWiki/Release Notes]]%0a* [[PmWiki/ChangeLog]]%0a%0a* [[http://www.pmwiki.org | pmwiki.org ]]%25item class=nav-header%25%25list class="nav nav-list"%25%0a* [[Cookbook:CookbookBasics | Cookbook (addons) ]]%0a* [[Cookbook:Skins | Skins (themes) ]]%0a* [[PITS:PITS | PITS (issue tracking) ]]%0a* [[PmWiki/Mailing Lists]]%0a%0a[-[[Site.SideBar?action=edit | edit SideBar]]-]
+time=1357318175
+author:1357318175=gambhiro
+diff:1357318175:1357318161:=19c19%0a%3c [-[[Site.SideBar?action=edit | edit SideBar]]-]%0a\ No newline at end of file%0a---%0a> [-[[Site.SideBar?action=edit | edit SideBar]]-]%25p class=pull-right%25%0a\ No newline at end of file%0a
+host:1357318175=127.0.0.1
+author:1357318161=gambhiro
+diff:1357318161:1357318100:=19c19%0a%3c [-[[Site.SideBar?action=edit | edit SideBar]]-]%25p class=pull-right%25%0a\ No newline at end of file%0a---%0a> [-[[Site.SideBar?action=edit | edit SideBar]]-]%0a\ No newline at end of file%0a
+host:1357318161=127.0.0.1
+author:1357318100=gambhiro
+diff:1357318100:1357317998:=1c1%0a%3c * [[Main/HomePage]]%25list class="nav nav-list"%25%25item class=active%25%0a---%0a> * [[Main/HomePage]]%25list class="nav nav-list"%25%0a19c19%0a%3c [-[[Site.SideBar?action=edit | edit SideBar]]-]%0a\ No newline at end of file%0a---%0a> [-[[Site.SideBar?action=edit | edit SideBar]]-]%25p class=pull-right%25%0a\ No newline at end of file%0a
+host:1357318100=127.0.0.1
+author:1357317998=gambhiro
+diff:1357317998:1357317553:=1c1,2%0a%3c * [[Main/HomePage]]%25list class="nav nav-list"%25%0a---%0a> %0a> * [[Main/HomePage]]%0a3,4c4,6%0a%3c %0a%3c * [[PmWiki/PmWiki]]%25item class=nav-header%25%25list class="nav nav-list"%25%0a---%0a> %25list class="nav nav-list"%25%0a> %0a> * [[PmWiki/PmWiki]] %25class=nav-header%25%0a12,13c14,16%0a%3c %0a%3c * [[http://www.pmwiki.org | pmwiki.org ]]%25item class=nav-header%25%25list class="nav nav-list"%25%0a---%0a> %25list class="nav nav-list"%25%0a> %0a> * [[http://www.pmwiki.org | pmwiki.org ]] %25class=nav-header%25%0a18,19c21,23%0a%3c %0a%3c [-[[Site.SideBar?action=edit | edit SideBar]]-]%25p class=pull-right%25%0a\ No newline at end of file%0a---%0a> %25list class="nav nav-list"%25%0a> %0a> [-[[Site.SideBar?action=edit | edit SideBar]]-] %25class=pull-right%25%0a\ No newline at end of file%0a
+host:1357317998=127.0.0.1
+author:1357317553=gambhiro
+diff:1357317553:1125550800:=1d0%0a%3c %0a4,6c3,4%0a%3c %25list class="nav nav-list"%25%0a%3c %0a%3c * [[PmWiki/PmWiki]] %25class=nav-header%25%0a---%0a> %0a> %25sidehead%25 [[PmWiki/PmWiki]]%0a14,16c12,13%0a%3c %25list class="nav nav-list"%25%0a%3c %0a%3c * [[http://www.pmwiki.org | pmwiki.org ]] %25class=nav-header%25%0a---%0a> %0a> %25sidehead%25 [[http://www.pmwiki.org | pmwiki.org ]]%0a21,23c18,19%0a%3c %25list class="nav nav-list"%25%0a%3c %0a%3c [-[[Site.SideBar?action=edit | edit SideBar]]-] %25class=pull-right%25%0a\ No newline at end of file%0a---%0a> %0a> %25right%25 [-[[Site.SideBar?action=edit | edit SideBar]]-]%0a\ No newline at end of file%0a
+host:1357317553=127.0.0.1
