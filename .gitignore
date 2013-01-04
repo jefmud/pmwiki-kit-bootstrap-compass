@@ -1,7 +1,8 @@
 .sass-cache
 .rvmrc
 Gemfile.lock
+*.swp
+wiki.d/Site.AllRecentChanges
+wiki.d/*.RecentChanges
 
-# Don't track the css output by sass.
-# Put your custom css code in pub/sass and run 'compass compile'
-pub/css/*
+

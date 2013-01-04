@@ -1,0 +1,23 @@
+version=pmwiki-2.2.45 ordered=1 urlencoded=1
+agent=Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.4 (KHTML, like Gecko) Ubuntu/12.10 Chromium/22.0.1229.94 Chrome/22.0.1229.94 Safari/537.4
+author=admin
+charset=UTF-8
+csum=
+host=127.0.0.1
+name=SiteAdmin.AuthUser
+rev=8
+targets=PmWiki.AuthUser
+text=See [[PmWiki.AuthUser]] for documentation.%0a%0aadmin: $1$hfPGPlT1$jI5ldjHpsNQ6UB7qMaMfu.%0aadmin: @admins%0a%0aFor [[http://www.pmwiki.org/wiki/Cookbook/AuthUserFederated|AuthUserFederated]]:%0a%0agoogle://module%0aopenid://module%0a
+time=1357324420
+author:1357324420=admin
+diff:1357324420:1357324330:=3c3%0a%3c admin: $1$hfPGPlT1$jI5ldjHpsNQ6UB7qMaMfu.%0a---%0a> admin: (:crypt admin:)%0a
+host:1357324420=127.0.0.1
+author:1357324330=gambhiro
+diff:1357324330:1357231428:=3,4c3,5%0a%3c admin: (:crypt admin:)%0a%3c admin: @admins%0a---%0a> gambhiro: $1$ex9IGo2n$pmdk6L6jfKN9q.9wQUA76/%0a> %0a> gambhiro: @admins%0a
+host:1357324330=127.0.0.1
+author:1357231428=gambhiro
+diff:1357231428:1357231324:=7,10d6%0a%3c For [[http://www.pmwiki.org/wiki/Cookbook/AuthUserFederated|AuthUserFederated]]:%0a%3c %0a%3c google://module%0a%3c openid://module%0a
+host:1357231428=127.0.0.1
+author:1357231324=gambhiro
+diff:1357231324:1000000000:=1,5c1,41%0a%3c See [[PmWiki.AuthUser]] for documentation.%0a%3c %0a%3c gambhiro: $1$ex9IGo2n$pmdk6L6jfKN9q.9wQUA76/%0a%3c %0a%3c gambhiro: @admins%0a---%0a> (:Summary: Configuration of identity based authorisations:)(:nolinkwikiwords:)%0a> This is the default configuration page for PmWiki's identity-based authorizations (aka "authuser.php").  See [[PmWiki.AuthUser]] for instructions.%0a> %0a> (:if enabled EnableAuthUser:)%0a> This site appears to have the [[PmWiki/AuthUser]] extensions enabled.%0a> (:if !enabled EnableAuthUser:)%0a> At present this site doesn't appear to have the [[PmWiki/AuthUser]] extensions enabled.  To enable them, add the line [@include_once("$FarmD/scripts/authuser.php");@] to your ''local/config.php'' file.  (See [[PmWiki.LocalCustomizations]].)%0a> (:ifend:)%0a> %0a> !! Login accounts%0a> %0a> Specify login accounts in the form "@@[=username: (:=]encrypt ''password'':)@@" at the beginning of a line:%0a> %0a> -> # Examples:%0a> -> alice: [=(:=]encrypt wonderland:)%0a> -> bob: [=(:=]encrypt builder:)%0a> %0a> Note that the passwords will be encrypted when the page is saved, so that the result will look something like:%0a> %0a> -> alice: $1$0gcdAN1a$HTdEAXyYYo8Hc9/Xv30Yz1%0a> -> bob: $1$wSP2R80i$sJ593ERCmTtjm3Fk26HCV1%0a> %0a> To authorize specific login accounts for pages and groups, use "[@id:username@]" as a password in [@?action=attr@] or $DefaultPasswords (see [[PmWiki.Passwords]]).  Use "[@id:*@]" to mean "any logged-in user".%0a> %0a> !! Authorization groups%0a> %0a> Authorization groups are specified with a leading "@" sign.  Define either the login accounts belonging to a group or the groups for a login account:%0a> %0a> -> @writers: alice, bob  %0a> -> carol: @editors, @writers%0a> -> @admins: alice, dave%0a> %0a> Then use "[@@group@]" as a password in [@?action=attr@] or $DefaultPasswords.%0a> %0a> !! Login accounts from external sources%0a> %0a> Obtaining login accounts from external sources (to enable a source, place it at the beginning of a line):%0a> %0a> -> htpasswd: /filesystem/path/to/.htpasswd%0a> -> ldap: ldap://ldap.example.com/ou=People,o=example?uid?sub%0a> -> mysql: mysql://[username:password]@localhost/db/table?user,passwd%0a
+host:1357231324=127.0.0.1
