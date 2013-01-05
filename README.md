@@ -5,7 +5,7 @@ A pre-configured [PmWiki](http://www.pmwiki.org/) starter kit with a selection o
 
 Works out of the box. Download it, point your web server to it and start editing your pages.
 
-**Status:** a working wiki with addons. Sample pages for those addons coming soon.
+**Status:** the basic wiki with addons installed. Sample pages for those addons coming soon.
 
 Bootstrap-fluid greeting screen:
 
