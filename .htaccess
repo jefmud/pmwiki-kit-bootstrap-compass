@@ -1,0 +1,95 @@
+
+## ====================================================================
+## .htaccess for PmWiki Kit, configured for Clean URLs and FastCache.
+##
+## First things to do:
+##
+## Replace 'linuxuser' with the username on the host.
+## Replace 'mysite.org' with your domain.
+## Replace 'PMWIKIKIT' with the session name you set in
+##   local/config.php.
+##
+## There might be other changes necessary for your environment, check
+## the settings below.
+## ====================================================================
+
+## Clean URLs
+## http://www.pmwiki.org/wiki/Cookbook/CleanUrls#URL_rewriting
+
+# Use mod_rewrite to enable "Clean URLs" for a PmWiki installation.
+RewriteEngine On
+
+# Define the rewrite base.
+# if your wiki is served from the domain's root (mysite.org):
+# RewriteBase /
+# if from a user folder:
+# RewriteBase /~someuser/pmwiki
+RewriteBase /
+
+# Use mod_rewrite to enable "Clean URLs" for a PmWiki installation.
+RewriteEngine On
+# Define the rewrite base.
+RewriteBase /
+
+# protect .git
+RewriteRule \.git - [F,L]
+
+## FastCache
+## http://www.pmwiki.org/wiki/Cookbook/FastCache
+
+# We need some sort of caching b/c otherwise we are parsing the page content
+# every time with pub/cgi/multimarkdown
+
+# Non-capital first letter means that it's not a wiki page
+RewriteRule ^[a-z].*$ - [L]
+
+# Define the rules that exclude things from the cache:
+# If any of these conditions are true ...
+
+# Posting a form request
+RewriteCond %{REQUEST_METHOD} POST [OR]
+# A session exists -> the user is signed in
+RewriteCond %{HTTP_COOKIE} PMWIKIKIT [OR]
+# A query string exists; ie. we're not just viewing a page
+RewriteCond %{QUERY_STRING} .
+# ... serve the file using pmwiki.php
+RewriteRule ^(.*)$ pmwiki.php?n=$1 [QSA,L]
+
+# If we're this far in the script it's ok to serve files from the cache
+
+# Root means that we want the wiki homepage
+RewriteCond %{REQUEST_URI} ^/$
+# Does the file exist?
+# Change 'Main.HomePage' here if you're using a different page
+RewriteCond /home/linuxuser/public_html/mysite.org/pub/htmlcache/Main.HomePage.html -f
+# If so, serve it.
+# Change 'Main.HomePage' here if you're using a different page
+RewriteRule ^$ pub/htmlcache/Main.HomePage.html [L]
+
+# No . or / in the URL means that we want the group main page
+RewriteCond %{REQUEST_URI} ^/([^./?]+)[./]?$
+# Does the file exist?
+# Change '%1.%1' here if you're using a different group main page format
+RewriteCond /home/linuxuser/public_html/mysite.org/pub/htmlcache/%1.%1.html -f
+# If so, serve it.
+RewriteRule ^. pub/htmlcache/%1.%1.html [L]
+
+# We want Group.Page
+RewriteCond %{REQUEST_URI} ^/([^./]+)[./]([^./]+)/?$
+# Does the file exist?
+RewriteCond /home/linuxuser/public_html/mysite.org/pub/htmlcache/%1.%2.html -f
+# If so, serve it.
+RewriteRule ^. pub/htmlcache/%1.%2.html [L]
+
+## More for Clean URLs
+
+# Send requests without parameters to pmwiki.php.
+RewriteRule ^$ pmwiki.php [L]
+# Send requests for index.php to pmwiki.php.
+RewriteRule ^index\.php$ pmwiki.php [L]
+# Send requests to pmwiki.php, appending the query string part.
+RewriteRule ^([A-Z0-9\xa0-\xff].*)$ pmwiki.php?n=$1  [QSA,L]
+
+# Anything that doesn't fit the above goes to pmwiki.php
+RewriteRule ^(.*)$ pmwiki.php?n=$1 [QSA,L]
+

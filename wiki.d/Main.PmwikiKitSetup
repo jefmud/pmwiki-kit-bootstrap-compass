@@ -1,0 +1,31 @@
+version=pmwiki-2.2.45 ordered=1 urlencoded=1
+agent=Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.4 (KHTML, like Gecko) Ubuntu/12.10 Chromium/22.0.1229.94 Chrome/22.0.1229.94 Safari/537.4
+author=admin
+charset=UTF-8
+csum=
+ctime=1357373983
+host=127.0.0.1
+name=Main.PmwikiKitSetup
+rev=6
+targets=SiteAdmin.AuthUser,PmWiki.AuthUser,PmWiki.InitialSetupTasks
+text=(:title PmWiki Kit Setup:)%0a%0a!! Folder permissions%0a%0aYour web server needs write permissions for @@wiki.d/@@ and @@pub/htmlcache/@@. However, on your local machine you might want to edit or delete those files too. Assuming @@linuxuser@@ as your desktop username and @@nogroup@@ for the web server's user group:%0a%0a    cd pmwiki-kit-bootstrap-compass%0a    sudo chown -R linuxuser:nogroup wiki.d/ pub/htmlcache/%0a    sudo chmod -R g+w wiki.d/ pub/htmlcache/%0a%0a!! Users and passwords%0a%0aChange the default password:%0a%0aOpen [[SiteAdmin.AuthUser]], login with @@admin : admin@@. Edit the page and set your user and password. You can call your "admin user" something else than "admin", but add him to the @@@admins@@ group. When you save the page, the @@(:encrypt:)@@ directive will replace the password with an encrypted form.%0a%0a    username: [=(:=]encrypt userpassword:)%0a    username: @admins%0a%0aSetup any other users you want using the same syntax. The @@@editors@@ group is already configured for edit permissions. Check out the [[PmWiki.AuthUser]] docs too.%0a%0a!! .htaccess settings%0a%0a* Replace @@linuxuser@@ with the username on the host.%0a* Replace @@mysite.org@@ with your domain.%0a* Replace @@PMWIKIKIT@@ with the session name you set in @@local/config.php@@.%0a%0aThere might be other changes necessary for your environment, check the rest of @@.htaccess@@.%0a%0a!! config.php%0a%0aIn @@local/config.php@@, change @@$ScriptUrl@@ and @@$PubDirUrl@@:%0a%0a    $ScriptUrl = 'http://www.mydomain.com/path/to/pmwiki.php';%0a    $PubDirUrl = 'http://www.mydomain.com/path/to/pub';%0a%0a!! Good to go%0a%0aAfter this it's OK to deploy the site and start working on the content, but sometime you should read:%0a%0a* [[PmWiki.InitialSetupTasks]]%0a* [[SiteAdmin.AuthUser]]%0a* the settings in @@local/config.php@@
+time=1357378454
+title=PmWiki Kit Setup
+author:1357378454=admin
+diff:1357378454:1357376774:=2,9d1%0a%3c %0a%3c !! Folder permissions%0a%3c %0a%3c Your web server needs write permissions for @@wiki.d/@@ and @@pub/htmlcache/@@. However, on your local machine you might want to edit or delete those files too. Assuming @@linuxuser@@ as your desktop username and @@nogroup@@ for the web server's user group:%0a%3c %0a%3c     cd pmwiki-kit-bootstrap-compass%0a%3c     sudo chown -R linuxuser:nogroup wiki.d/ pub/htmlcache/%0a%3c     sudo chmod -R g+w wiki.d/ pub/htmlcache/%0a
+host:1357378454=127.0.0.1
+author:1357376774=admin
+diff:1357376774:1357376710:=22,25c22,25%0a%3c !! config.php%0a%3c %0a%3c In @@local/config.php@@, change @@$ScriptUrl@@ and @@$PubDirUrl@@:%0a%3c %0a---%0a> !! Customize @@local/config.php@@%0a> %0a> Change @@$ScriptUrl@@ and @@$PubDirUrl@@:%0a> %0a35c35%0a%3c * the settings in @@local/config.php@@%0a\ No newline at end of file%0a---%0a> * the settings in @@local/config.php@@%0a
+host:1357376774=127.0.0.1
+author:1357376710=admin
+diff:1357376710:1357374180:=3,6c3,4%0a%3c !! Users and passwords%0a%3c %0a%3c Change the default password:%0a%3c %0a---%0a> !! Change the default password%0a> %0a11,35d8%0a%3c %0a%3c Setup any other users you want using the same syntax. The @@@editors@@ group is already configured for edit permissions. Check out the [[PmWiki.AuthUser]] docs too.%0a%3c %0a%3c !! .htaccess settings%0a%3c %0a%3c * Replace @@linuxuser@@ with the username on the host.%0a%3c * Replace @@mysite.org@@ with your domain.%0a%3c * Replace @@PMWIKIKIT@@ with the session name you set in @@local/config.php@@.%0a%3c %0a%3c There might be other changes necessary for your environment, check the rest of @@.htaccess@@.%0a%3c %0a%3c !! Customize @@local/config.php@@%0a%3c %0a%3c Change @@$ScriptUrl@@ and @@$PubDirUrl@@:%0a%3c %0a%3c     $ScriptUrl = 'http://www.mydomain.com/path/to/pmwiki.php';%0a%3c     $PubDirUrl = 'http://www.mydomain.com/path/to/pub';%0a%3c %0a%3c !! Good to go%0a%3c %0a%3c After this it's OK to deploy the site and start working on the content, but sometime you should read:%0a%3c %0a%3c * [[PmWiki.InitialSetupTasks]]%0a%3c * [[SiteAdmin.AuthUser]]%0a%3c * the settings in @@local/config.php@@%0a
+host:1357376710=127.0.0.1
+author:1357374180=admin
+diff:1357374180:1357374039:=7,8c7,10%0a%3c     username: [=(:=]encrypt userpassword:)%0a%3c     username: @admins%0a---%0a> [@%0a> username: $1$fJUn0dH2$hGjYMrR61/YUT2P/tVT841%0a> username: @admins%0a> @]%0a\ No newline at end of file%0a
+host:1357374180=127.0.0.1
+author:1357374039=admin
+diff:1357374039:1357373983:=5c5%0a%3c Open [[SiteAdmin.AuthUser]], login with @@admin : admin@@. Edit the page and set your user and password. You can call your "admin user" something else than "admin", but add him to the @@@admins@@ group. When you save the page, the @@(:encrypt:)@@ directive will replace the password with an encrypted form.%0a---%0a> Open [[SiteAdmin.AuthUser]], login with @@admin : admin@@. Edit the page and set your user and password. You can call your "admin user" something else than "admin", but add him to the @@@admins@@ group. When you save the page, @@$1$PmeiHzPh$A946XXQSdVYWe1JsCmaXr0@@ will be replaced with an encrypted form of the password.%0a
+host:1357374039=127.0.0.1
+author:1357373983=admin
+diff:1357373983:1357373983:=1,10d0%0a%3c (:title PmWiki Kit Setup:)%0a%3c %0a%3c !! Change the default password%0a%3c %0a%3c Open [[SiteAdmin.AuthUser]], login with @@admin : admin@@. Edit the page and set your user and password. You can call your "admin user" something else than "admin", but add him to the @@@admins@@ group. When you save the page, @@$1$PmeiHzPh$A946XXQSdVYWe1JsCmaXr0@@ will be replaced with an encrypted form of the password.%0a%3c %0a%3c [@%0a%3c username: $1$fJUn0dH2$hGjYMrR61/YUT2P/tVT841%0a%3c username: @admins%0a%3c @]%0a\ No newline at end of file%0a
+host:1357373983=127.0.0.1
