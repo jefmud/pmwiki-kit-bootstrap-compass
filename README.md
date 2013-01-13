@@ -5,6 +5,8 @@ A pre-configured [PmWiki](http://www.pmwiki.org/) starter kit with a selection o
 
 Works out of the box. Download it, point your web server to it and start editing your pages.
 
+**Status:** the basic wiki with addons installed. Sample pages for those addons coming soon.
+
 Bootstrap-fluid greeting screen:
 
 ![PmWiki Kit Main HomePage](https://github.com/gambhiro/pmwiki-kit-bootstrap-compass/wiki/images/PmWiki_Kit_Main_HomePage.png)
