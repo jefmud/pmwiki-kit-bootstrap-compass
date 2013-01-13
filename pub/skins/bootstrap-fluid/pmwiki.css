@@ -23,7 +23,6 @@
 #wikicmds li a.createlink { display:none; }
 #wikicmds li a:hover { text-decoration:underline; color:blue; }
 .pagegroup { margin-top:8px; margin-bottom:2px; }
-.pagetitle { line-height:1em; margin:0px; font-size:1.6em; font-weight:normal; }
 .wikiaction { margin-top:4px; margin-bottom:4px; }
 
 /* These are for the edit form. */

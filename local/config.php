@@ -317,6 +317,25 @@ include_once("$FarmD/cookbook/fastcache.php");
 ## ------
 ## http://www.pmwiki.org/wiki/Cookbook/BlogIt
 
+# [1] Define BlogIt roles, and associated actions
+# Actions: 'comment-edit', 'comment-approve', 'blog-edit', 'blog-new', 'sidebar', 'blogit-admin'
+$bi_Auth['blogs'] = array('comment-edit', 'comment-approve', 'blog-edit', 'blog-new', 'sidebar', 'blogit-admin');
+
+# [5] Assign roles to pmwiki actions
+$DefaultPasswords['blogs'] = array('@blogs');
+
+$bi_DefaultGroup='Blog';
+$bi_BlogGroups='Blog';
+
+$bi_Pages['rss']='Blog.Feed';
+$bi_RSSPerPage='25';
+
+# If you use Feedburner, give Feedburner this URL and then here you
+# can use the custom Feedburner URL.
+$feedUrl = 'http://mysite.org/Blog/Feed?action=rss';
+
+$bi_CommentsEnabled = 'none';
+
 ## BlogIt makes heavy use of includes, so this needs to be increased.
 $MaxIncludes = 500;
 include_once("$FarmD/cookbook/blogit/blogit.php");

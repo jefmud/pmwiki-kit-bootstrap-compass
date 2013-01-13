@@ -1,7 +1,36 @@
 
+
+// Load Bootswatch variables
+// =========================
+
+//@import "readable-variables";
+//@import "united-variables";
+
+// Load Bootstrap
+// ==============
+
+$iconSpritePath:          image-url("bootstrap/glyphicons-halflings.png");
+$iconWhiteSpritePath:     image-url("bootstrap/glyphicons-halflings-white.png");
+
 @import "compass_twitter_bootstrap";
-@import "compass_twitter_bootstrap_responsive";
 
 // In addition, to use the Font Awesome icons. Uncomment:
 // @import "compass_twitter_bootstrap_awesome";
 
+// Load Bootswatch layout corrections
+// ==================================
+
+//@import "readable-bootswatch";
+//@import "united-bootswatch";
+
+// Custom styles
+// =============
+
+@import "layout";
+@import "color";
+@import "type";
+
+// Load Responsive
+// ===============
+
+@import "compass_twitter_bootstrap_responsive";

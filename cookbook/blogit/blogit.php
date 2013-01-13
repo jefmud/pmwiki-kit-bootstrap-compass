@@ -31,7 +31,10 @@ SDV($bi_DateStyle, 'dmy');  #if you change the date entry format, then indicate 
 # ----------------------------------------
 # - Skin settings
 SDV($bi_Skin, ($Skin>'' ?$Skin :'pmwiki'));  #Needed if skin is set in group config, which is processed after main config
-SDV($PageCSSListFmt['pub/blogit/blogit-pmwiki.css'],'$PubDirUrl/blogit/blogit-pmwiki.css');  #Auto-load BlogIt PmWiki css file
+
+// FIXME: this conflicts with other items in array
+//SDV($PageCSSListFmt['pub/blogit/blogit-pmwiki.css'],'$PubDirUrl/blogit/blogit-pmwiki.css');  #Auto-load BlogIt PmWiki css file
+
 SDV($bi_AjaxMsgTimer, 3000);  #Number of milli-seconds that the top ajax message is displayed for
 #key: action; value: ajax style. Determines how an operation is handled, either ajax, normal (page reload), or by providing an option with normal-ajax, and ajax-normal
 SDVA($bi_Ajax, array('bi_ce'=>'ajax', 'bi_ca'=>'ajax', 'bi_cua'=>'ajax', 'bi_be'=>'normal-ajax', 'bi_ne'=>'normal-ajax', 'bi_del'=>'ajax'));
@@ -172,8 +175,11 @@ SDVA($HTMLFooterFmt, array(
 
 # ----------------------------------------
 # - RSS Config
-if ($bi_RSSEnabled == 'true')  $HTMLHeaderFmt['feedlinks'] =
-	'<link rel="alternate" type="application/rss+xml" title="$WikiTitle" href="$ScriptUrl?n=' .$bi_Pages['rss'] .'?action=rss" />'; #TODO: Add blogid
+#if ($bi_RSSEnabled == 'true')  $HTMLHeaderFmt['feedlinks'] = '<link rel="alternate" type="application/rss+xml" title="$WikiTitle" href="$ScriptUrl?n=' .$bi_Pages['rss'] .'?action=rss" />'; #TODO: Add blogid
+
+if (!isset($feedUrl) || $feedUrl == "") $feedUrl = '$ScriptUrl?n=' .$bi_Pages['rss'] .'?action=rss';
+if ($bi_RSSEnabled == 'true')  $HTMLHeaderFmt['feedlinks'] = '<link rel="alternate" type="application/rss+xml" title="$WikiTitle" href="$feedUrl" />';
+
 if ($bi_RSSEnabled == 'true' && $action == 'rss' && $bi_Pagename==$bi_Pages['rss']){  #add url parameter of $:blogid=xxx to restrict to a specific blog
 	if ($bi_DisplayFuture == 'false')  SDV($_REQUEST['if'], 'date ..@{$Now} @{$:entrydate}');
 	SDVA($_REQUEST, array(
