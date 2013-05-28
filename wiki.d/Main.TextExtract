@@ -1,0 +1,15 @@
+version=pmwiki-2.2.51 ordered=1 urlencoded=1
+agent=Mozilla/5.0 (Windows NT 6.1; WOW64; rv:20.0) Gecko/20100101 Firefox/20.0
+author=admin
+charset=UTF-8
+csum=
+ctime=1369706827
+host=127.0.0.1
+name=Main.TextExtract
+rev=1
+targets=
+text=Test for http://www.pmwiki.org/wiki/Cookbook/TextExtract%0a%0a----%0a(:markup:)%0aDefault Search Form showing fields for search term and for page pattern input.%0a%0a(:extract:)%0a(:searchresults:)%0a(:markupend:)%0a%0a----%0a(:markup:)%0aSearch PmWiki Documentation (by paragraph, ignore hidden markup)%0a%0a(:extract page=* group=PmWiki name=-RecentChanges regex=1:)%0a(:searchresults:)%0a(:markupend:)%0a%0a----%0a(:markup:)%0aSearch PmWiki Documentation (by line, with code )%0a%0a(:extract page=* group=PmWiki name=-RecentChanges markup=code unit=line  regex=1:)%0a(:searchresults:)%0a(:markupend:)%0a%0a%0a%0a
+time=1369706827
+author:1369706827=admin
+diff:1369706827:1369706827:=1,28d0%0a%3c Test for http://www.pmwiki.org/wiki/Cookbook/TextExtract%0a%3c %0a%3c ----%0a%3c (:markup:)%0a%3c Default Search Form showing fields for search term and for page pattern input.%0a%3c %0a%3c (:extract:)%0a%3c (:searchresults:)%0a%3c (:markupend:)%0a%3c %0a%3c ----%0a%3c (:markup:)%0a%3c Search PmWiki Documentation (by paragraph, ignore hidden markup)%0a%3c %0a%3c (:extract page=* group=PmWiki name=-RecentChanges regex=1:)%0a%3c (:searchresults:)%0a%3c (:markupend:)%0a%3c %0a%3c ----%0a%3c (:markup:)%0a%3c Search PmWiki Documentation (by line, with code )%0a%3c %0a%3c (:extract page=* group=PmWiki name=-RecentChanges markup=code unit=line  regex=1:)%0a%3c (:searchresults:)%0a%3c (:markupend:)%0a%3c %0a%3c %0a%3c %0a
+host:1369706827=127.0.0.1
