@@ -1,14 +1,20 @@
-version=pmwiki-2.2.45 ordered=1 urlencoded=1
-agent=Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.4 (KHTML, like Gecko) Ubuntu/12.10 Chromium/22.0.1229.94 Chrome/22.0.1229.94 Safari/537.4
+version=pmwiki-2.2.51 ordered=1 urlencoded=1
+agent=Mozilla/5.0 (Windows NT 6.1; WOW64; rv:20.0) Gecko/20100101 Firefox/20.0
 author=admin
 charset=UTF-8
 csum=
 host=127.0.0.1
 name=Main.HomePage
-rev=219
+rev=221
 targets=Main.PmwikiKitSetup,PmWiki.BasicEditing,Main.WikiSandbox
-text=(:div class="hero-unit":)%0a! PmWiki Kit%0a%0aA pre-configured [[http://www.pmwiki.org/|PmWiki]]%25apply=link newwin%25 starter kit with a selection of [[http://www.pmwiki.org/wiki/Cookbook/Cookbook|community addons]]%25apply=link newwin%25, a [[http://twitter.github.com/bootstrap/|Bootstrap]]%25apply=link newwin%25 skin and [[http://compass-style.org/|Compass]]%25apply=link newwin%25 stylesheets.%0a%0aWorks out of the box. Download it, point your web server to it and start editing your pages. Default login is @@admin : admin@@, perhaps [[Main.PmwikiKitSetup|change that]] before you go live.%0a%0a[[https://github.com/gambhiro/pmwiki-kit-bootstrap-compass|Github Repo]]%25apply=link newwin class="btn btn-primary"%25 @@git clone git://github.com/gambhiro/pmwiki-kit-bootstrap-compass.git@@%0a(:divend:)%0a%0a(:div class="row-fluid":)%0a(:div2 class="span4":)%0a!! Addons%0a%0a* [[http://www.pmwiki.org/wiki/Cookbook/RenamePage|RenamePage]]%0a* [[http://www.pmwiki.org/wiki/Cookbook/PowerTools|PowerTools]]%0a* [[http://www.pmwiki.org/wiki/Cookbook/TextExtract|TextExtract]]%0a* [[http://www.pmwiki.org/wiki/Cookbook/FastCache|FastCache]]%0a* [[http://www.pmwiki.org/wiki/Cookbook/BlogIt|BlogIt]]%0a(:div2end:)%0a(:div2 class="span4":)%0a!! Editing%0a%0aThe [[PmWiki/basic editing]] page describes how to create pages%0ain PmWiki.  You can practice editing in the [[wiki sandbox]].%0a%0a[[PmWiki/basic editing|+]]%25apply=link class="btn"%25%0a(:div2end:)%0a%0a(:div2 class="span4":)%0a!! More%0aMore information about PmWiki is available from%0a%0a[[http://www.pmwiki.org]]%25apply=link class="btn"%25%0a(:div2end:)%0a(:divend:)
-time=1357376922
+text=(:div class="hero-unit":)%0a! PmWiki Kit%0a%0aA pre-configured [[http://www.pmwiki.org/|PmWiki]]%25apply=link newwin%25 starter kit with a selection of [[http://www.pmwiki.org/wiki/Cookbook/Cookbook|community addons]]%25apply=link newwin%25, a [[http://twitter.github.com/bootstrap/|Bootstrap]]%25apply=link newwin%25 skin and [[http://compass-style.org/|Compass]]%25apply=link newwin%25 stylesheets.%0a%0aWorks out of the box. Download it, point your web server to it and start editing your pages. Default login is @@admin : admin@@, perhaps [[Main.PmwikiKitSetup|change that]] before you go live.%0a%0a[[https://github.com/gambhiro/pmwiki-kit-bootstrap-compass|Github Repo]]%25apply=link newwin class="btn btn-primary"%25 @@git clone git://github.com/gambhiro/pmwiki-kit-bootstrap-compass.git@@%0a(:divend:)%0a%0a(:div class="row-fluid":)%0a(:div2 class="span4":)%0a!! Addons%0a(:include Addons:)%0a(:div2end:)%0a(:div2 class="span4":)%0a!! Editing%0a%0aThe [[PmWiki/basic editing]] page describes how to create pages%0ain PmWiki.  You can practice editing in the [[wiki sandbox]].%0a%0a[[PmWiki/basic editing|+]]%25apply=link class="btn"%25%0a(:div2end:)%0a%0a(:div2 class="span4":)%0a!! More%0aMore information about PmWiki is available from%0a%0a[[http://www.pmwiki.org]]%25apply=link class="btn"%25%0a(:div2end:)%0a(:divend:)
+time=1369707277
+author:1369707277=admin
+diff:1369707277:1357376922:=14c14,19%0a%3c (:include Addons:)%0a---%0a> %0a> * [[http://www.pmwiki.org/wiki/Cookbook/RenamePage|RenamePage]]%0a> * [[http://www.pmwiki.org/wiki/Cookbook/PowerTools|PowerTools]]%0a> * [[http://www.pmwiki.org/wiki/Cookbook/TextExtract|TextExtract]]%0a> * [[http://www.pmwiki.org/wiki/Cookbook/FastCache|FastCache]]%0a> * [[http://www.pmwiki.org/wiki/Cookbook/BlogIt|BlogIt]]%0a
+host:1369707277=127.0.0.1
+author:1369707236=admin
+diff:1369707236:1357376922:=14c14%0a%3c (:include Addons:)%0a---%0a> %0a
+host:1369707236=127.0.0.1
 author:1357376922=admin
 diff:1357376922:1357374309:=6c6%0a%3c Works out of the box. Download it, point your web server to it and start editing your pages. Default login is @@admin : admin@@, perhaps [[Main.PmwikiKitSetup|change that]] before you go live.%0a---%0a> Works out of the box. Download it, point your web server to it and start editing your pages. Default login is @@admin : admin@@, [[Main.PmwikiKitSetup|change that]] on your wiki.%0a
 host:1357376922=127.0.0.1

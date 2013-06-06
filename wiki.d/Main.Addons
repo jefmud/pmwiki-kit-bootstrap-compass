@@ -1,0 +1,15 @@
+version=pmwiki-2.2.51 ordered=1 urlencoded=1
+agent=Mozilla/5.0 (Windows NT 6.1; WOW64; rv:20.0) Gecko/20100101 Firefox/20.0
+author=admin
+charset=UTF-8
+csum=
+ctime=1369707205
+host=127.0.0.1
+name=Main.Addons
+rev=1
+targets=
+text=(:comment the following addons come bundled with the pmwiki-bootstrap-kip:)%0a* [[http://www.pmwiki.org/wiki/Cookbook/RenamePage|RenamePage]]%0a* [[http://www.pmwiki.org/wiki/Cookbook/PowerTools|PowerTools]]%0a* [[http://www.pmwiki.org/wiki/Cookbook/TextExtract|TextExtract]]%0a* [[http://www.pmwiki.org/wiki/Cookbook/FastCache|FastCache]]%0a* [[http://www.pmwiki.org/wiki/Cookbook/BlogIt|BlogIt]]
+time=1369707205
+author:1369707205=admin
+diff:1369707205:1369707205:=1,6d0%0a%3c (:comment the following addons come bundled with the pmwiki-bootstrap-kip:)%0a%3c * [[http://www.pmwiki.org/wiki/Cookbook/RenamePage|RenamePage]]%0a%3c * [[http://www.pmwiki.org/wiki/Cookbook/PowerTools|PowerTools]]%0a%3c * [[http://www.pmwiki.org/wiki/Cookbook/TextExtract|TextExtract]]%0a%3c * [[http://www.pmwiki.org/wiki/Cookbook/FastCache|FastCache]]%0a%3c * [[http://www.pmwiki.org/wiki/Cookbook/BlogIt|BlogIt]]%0a\ No newline at end of file%0a
+host:1369707205=127.0.0.1

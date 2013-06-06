@@ -1,7 +1,7 @@
 <?php
 /*
     PmWiki
-    Copyright 2001-2012 Patrick R. Michaud
+    Copyright 2001-2013 Patrick R. Michaud
     pmichaud@pobox.com
     http://www.pmichaud.com/
 
@@ -576,15 +576,20 @@ function mkdirp($dir) {
 
 ## fixperms attempts to correct permissions on a file or directory
 ## so that both PmWiki and the account (current dir) owner can manipulate it
-function fixperms($fname, $add = 0) {
+function fixperms($fname, $add = 0, $set = 0) {
   clearstatcache();
   if (!file_exists($fname)) Abort('?no such file');
-  $bp = 0;
-  if (fileowner($fname)!=@fileowner('.')) $bp = (is_dir($fname)) ? 007 : 006;
-  if (filegroup($fname)==@filegroup('.')) $bp <<= 3;
-  $bp |= $add;
-  if ($bp && (fileperms($fname) & $bp) != $bp)
-    @chmod($fname,fileperms($fname)|$bp);
+  if ($set) { # advanced admins, $UploadPermSet
+    if (fileperms($fname) != $set) @chmod($fname,$set);
+  }
+  else {
+    $bp = 0;
+    if (fileowner($fname)!=@fileowner('.')) $bp = (is_dir($fname)) ? 007 : 006;
+    if (filegroup($fname)==@filegroup('.')) $bp <<= 3;
+    $bp |= $add;
+    if ($bp && (fileperms($fname) & $bp) != $bp)
+      @chmod($fname,fileperms($fname)|$bp);
+  }
 }
 
 ## GlobToPCRE converts wildcard patterns into pcre patterns for
@@ -884,7 +889,13 @@ function XL($key) {
 }
 function XLSDV($lang,$a) {
   global $XL;
-  foreach($a as $k=>$v) { if (!isset($XL[$lang][$k])) $XL[$lang][$k]=$v; }
+  foreach($a as $k=>$v) {
+    if (!isset($XL[$lang][$k])) {
+      if(preg_match('/^e_(rows|cols)$/', $k)) $v = intval($v);
+      elseif(preg_match('/^ak_/', $k)) $v = $v{0};
+      $XL[$lang][$k]=$v;
+    }
+  }
 }
 function XLPage($lang,$p,$nohtml=false) {
   global $TimeFmt,$XLLangs,$FarmD, $EnableXLPageScriptLoad;
@@ -1489,9 +1500,11 @@ function LinkPage($pagename,$imap,$path,$alt,$txt,$fmt=NULL) {
   global $QueryFragPattern, $LinkPageExistsFmt, $LinkPageSelfFmt,
     $LinkPageCreateSpaceFmt, $LinkPageCreateFmt, $LinkTargets,
     $EnableLinkPageRelative;
+  $alt = str_replace(array('"',"'"),array('&#34;','&#39;'),$alt);
   if (!$fmt && $path{0} == '#') {
     $path = preg_replace("/[^-.:\\w]/", '', $path);
-    return ($path) ? "<a href='#$path'>$txt</a>" : '';
+    if($alt) $alt = " title='$alt'";
+    return ($path) ? "<a href='#$path'$alt>".str_replace("$", "&#036;", $txt)."</a>" : '';
   }
   if (!preg_match("/^\\s*([^#?]+)($QueryFragPattern)?$/",$path,$match))
     return '';
@@ -1510,7 +1523,6 @@ function LinkPage($pagename,$imap,$path,$alt,$txt,$fmt=NULL) {
   $url = PageVar($tgtname, '$PageUrl');
   if (trim($txt) == '+') $txt = PageVar($tgtname, '$Title');
   $txt = str_replace("$", "&#036;", $txt);
-  $alt = str_replace(array('"',"'"),array('&#34;','&#39;'),$alt);
   if (@$EnableLinkPageRelative)
     $url = preg_replace('!^[a-z]+://[^/]*!i', '', $url);
   $fmt = str_replace(array('$LinkUrl', '$LinkText', '$LinkAlt'),
