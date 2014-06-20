@@ -1,5 +1,5 @@
 <?php if (!defined('PmWiki')) exit();
-/*  Copyright 2005-2010 Patrick R. Michaud (pmichaud@pobox.com)
+/*  Copyright 2005-2014 Patrick R. Michaud (pmichaud@pobox.com)
     This file is part of PmWiki; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published
     by the Free Software Foundation; either version 2 of the License, or
@@ -9,7 +9,9 @@
 # $InputAttrs are the attributes we allow in output tags
 SDV($InputAttrs, array('name', 'value', 'id', 'class', 'rows', 'cols', 
   'size', 'maxlength', 'action', 'method', 'accesskey', 'tabindex', 'multiple',
-  'checked', 'disabled', 'readonly', 'enctype', 'src', 'alt'));
+  'checked', 'disabled', 'readonly', 'enctype', 'src', 'alt',
+  'required', 'placeholder', 'autocomplete'
+  ));
 
 # Set up formatting for text, submit, hidden, radio, etc. types
 foreach(array('text', 'submit', 'hidden', 'password', 'radio', 'checkbox',
@@ -56,14 +58,14 @@ SDVA($InputTags['default'], array(':fn' => 'InputDefault'));
 SDVA($InputTags['defaults'], array(':fn' => 'InputDefault'));
 
 ##  (:input ...:) directives
-Markup('input', 'directives',
-  '/\\(:input\\s+(\\w+)(.*?):\\)/ei',
-  "InputMarkup(\$pagename, '$1', PSS('$2'))");
+Markup_e('input', 'directives',
+  '/\\(:input\\s+(\\w+)(.*?):\\)/i',
+  "InputMarkup(\$pagename, \$m[1], \$m[2])");
 
 ##  (:input select:) has its own markup processing
-Markup('input-select', '<input',
-  '/\\(:input\\s+select\\s.*?:\\)(?:\\s*\\(:input\\s+select\\s.*?:\\))*/ei',
-  "InputSelect(\$pagename, 'select', PSS('$0'))");
+Markup_e('input-select', '<input',
+  '/\\(:input\\s+select\\s.*?:\\)(?:\\s*\\(:input\\s+select\\s.*?:\\))*/i',
+  "InputSelect(\$pagename, 'select', \$m[0])");
 
 ##  The 'input+sp' rule combines multiple (:input select ... :)
 ##  into a single markup line (to avoid split line effects)
@@ -81,7 +83,7 @@ function InputToHTML($pagename, $type, $args, &$opt) {
     $InputFocusLevel, $InputFocusId, $InputFocusFmt, $HTMLFooterFmt;
   if (!@$InputTags[$type]) return "(:input $type $args:)";
   ##  get input arguments
-  if (!is_array($args)) $args = ParseArgs($args);
+  if (!is_array($args)) $args = ParseArgs($args, '(?>([\\w-]+)[:=])');
   ##  convert any positional arguments to named arguments
   $posnames = @$InputTags[$type][':args'];
   if (!$posnames) $posnames = array('name', 'value');
@@ -241,11 +243,11 @@ function RequestArgs($req = NULL) {
 
 
 ## Form-based authorization prompts (for use with PmWikiAuth)
-
-$r = str_replace("'", '%37', stripmagic($_SERVER['REQUEST_URI']));
 SDVA($InputTags['auth_form'], array(
-  ':html' => "<form action='$r' method='post' 
-    name='authform'>\$PostVars"));
+  ':html' => "<form \$InputFormArgs>\$PostVars",
+  'action' => str_replace("'", '%37', stripmagic($_SERVER['REQUEST_URI'])),
+  'method' => 'post',
+  'name' => 'authform'));
 SDV($AuthPromptFmt, array(&$PageStartFmt, 'page:$SiteGroup.AuthForm',
   "<script language='javascript' type='text/javascript'><!--
     try { document.authform.authid.focus(); }
@@ -276,8 +278,8 @@ if (@$_REQUEST['editform']) {
 $Conditions['e_preview'] = '(boolean)$_REQUEST["preview"]';
 
 # (:e_preview:) displays the preview of formatted text.
-Markup('e_preview', 'directives',
-  '/^\\(:e_preview:\\)/e',
+Markup_e('e_preview', 'directives',
+  '/^\\(:e_preview:\\)/',
   "isset(\$GLOBALS['FmtV']['\$PreviewText']) ? Keep(\$GLOBALS['FmtV']['\$PreviewText']): ''");
 
 # If we didn't load guiedit.php, then set (:e_guibuttons:) to

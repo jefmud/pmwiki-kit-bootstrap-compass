@@ -1,5 +1,5 @@
 <?php if (!defined('PmWiki')) exit();
-/*  Copyright 2004-2013 Patrick R. Michaud (pmichaud@pobox.com)
+/*  Copyright 2004-2014 Patrick R. Michaud (pmichaud@pobox.com)
     This file is part of PmWiki; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published
     by the Free Software Foundation; either version 2 of the License, or
@@ -37,6 +37,9 @@ SDVA($UploadExts,array(
   'hqx' => 'application/mac-binhex40', 'sit' => 'application/x-stuffit',
   'doc' => 'application/msword', 'ppt' => 'application/vnd.ms-powerpoint',
   'xls' => 'application/vnd.ms-excel', 'mdb' => 'text/plain',
+  'docx' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+  'pptx' => 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+  'xlsx' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
   'exe' => 'application/octet-stream',
   'pdf' => 'application/pdf', 'psd' => 'text/plain', 
   'ps'  => 'application/postscript', 'ai' => 'application/postscript',
@@ -106,9 +109,9 @@ SDV($DefaultPasswords['upload'],'*');
 SDV($AuthCascade['upload'], 'read');
 SDV($FmtPV['$PasswdUpload'], 'PasswdVar($pn, "upload")');
 
-Markup('attachlist', 'directives', 
-  '/\\(:attachlist\\s*(.*?):\\)/ei',
-  "Keep('<ul>'.FmtUploadList('$pagename',PSS('$1')).'</ul>')");
+Markup_e('attachlist', 'directives',
+  '/\\(:attachlist\\s*(.*?):\\)/i',
+  "Keep('<ul>'.FmtUploadList('$pagename',\$m[1]).'</ul>')");
 SDV($GUIButtons['attach'], array(220, 'Attach:', '', '$[file.ext]',
   '$GUIButtonDirUrlFmt/attach.gif"$[Attach file]"'));
 SDV($LinkFunctions['Attach:'], 'LinkUpload');
@@ -126,16 +129,15 @@ function MakeUploadName($pagename,$x) {
   SDV($UploadNameChars, "-\\w. ");
   SDV($MakeUploadNamePatterns, array(
     "/[^$UploadNameChars]/" => '',
-    '/\\.[^.]*$/e' => 'strtolower("$0")',
+    '/\\.[^.]*$/' => PCCF('return strtolower($m[0]);'),
     '/^[^[:alnum:]_]+/' => '',
     '/[^[:alnum:]_]+$/' => ''));
-   return preg_replace(array_keys($MakeUploadNamePatterns),
-            array_values($MakeUploadNamePatterns), $x);
+   return PPRA($MakeUploadNamePatterns, $x);
 }
 
 function LinkUpload($pagename, $imap, $path, $alt, $txt, $fmt=NULL) {
-  global $FmtV, $UploadFileFmt, $LinkUploadCreateFmt, $UploadUrlFmt,
-    $UploadPrefixFmt, $EnableDirectDownload;
+  global $FmtV, $UploadFileFmt, $LinkUploadCreateFmt,
+    $UploadUrlFmt, $UploadPrefixFmt, $EnableDirectDownload;
   if (preg_match('!^(.*)/([^/]+)$!', $path, $match)) {
     $pagename = MakePageName($pagename, $match[1]);
     $path = $match[2];
@@ -143,7 +145,7 @@ function LinkUpload($pagename, $imap, $path, $alt, $txt, $fmt=NULL) {
   $upname = MakeUploadName($pagename, $path);
   $encname = rawurlencode($upname);
   $filepath = FmtPageName("$UploadFileFmt/$upname", $pagename);
-  $FmtV['$LinkUpload'] = 
+  $FmtV['$LinkUpload'] =
     FmtPageName("\$PageUrl?action=upload&amp;upname=$encname", $pagename);
   $FmtV['$LinkText'] = $txt;
   if (!file_exists($filepath)) 
@@ -303,7 +305,7 @@ function dirsize($dir) {
 
 function FmtUploadList($pagename, $args) {
   global $UploadDir, $UploadPrefixFmt, $UploadUrlFmt, $EnableUploadOverwrite,
-    $TimeFmt, $EnableDirectDownload;
+    $TimeFmt, $EnableDirectDownload, $IMapLinkFmt, $UrlLinkFmt, $FmtV;
 
   $opt = ParseArgs($args);
   if (@$opt[''][0]) $pagename = MakePageName($pagename, $opt[''][0]);
@@ -330,14 +332,19 @@ function FmtUploadList($pagename, $args) {
   $out = array();
   natcasesort($filelist);
   $overwrite = '';
+  $fmt = IsEnabled($IMapLinkFmt['Attach:'], $UrlLinkFmt);
   foreach($filelist as $file=>$encfile) {
-    $name = PUE("$uploadurl$encfile");
+    $FmtV['$LinkUrl'] = PUE("$uploadurl$encfile");
+    $FmtV['$LinkText'] = $file;
+    $FmtV['$LinkUpload'] =
+      FmtPageName("\$PageUrl?action=upload&amp;upname=$encfile", $pagename);
     $stat = stat("$uploaddir/$file");
     if ($EnableUploadOverwrite) 
       $overwrite = FmtPageName("<a rel='nofollow' class='createlink'
-        href='\$PageUrl?action=upload&amp;upname=$encfile'>&nbsp;&Delta;</a>", 
+        href='\$LinkUpload'>&nbsp;&Delta;</a>",
         $pagename);
-    $out[] = "<li> <a href='$name'>$file</a>$overwrite ... ".
+    $lnk = FmtPageName($fmt, $pagename);
+    $out[] = "<li> $lnk$overwrite ... ".
       number_format($stat['size']) . " bytes ... " . 
       strftime($TimeFmt, $stat['mtime']) . "</li>";
   }

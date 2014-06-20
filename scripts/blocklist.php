@@ -44,8 +44,9 @@
 ##   but at some point we may change the default to disabled.
 if (IsEnabled($EnableBlocklistImmediate, 1)) {
   SDVA($BlocklistActions, array('comment' => 1));
-  if (isset($_POST['text']) && @$BlocklistActions[$action]) {
-    Blocklist($pagename, $_POST['text']);
+  $ptext = implode(' ', @$_POST);
+  if ($ptext && @$BlocklistActions[$action]) {
+    Blocklist($pagename, $ptext);
     if (!$EnablePost) {
       unset($_POST['post']);
       unset($_POST['postattr']);
@@ -73,7 +74,7 @@ if ($EnableBlocklist >= 10) {
 array_unshift($EditFunctions, 'CheckBlocklist');
 function CheckBlocklist($pagename, &$page, &$new) { 
   StopWatch("CheckBlocklist: begin $pagename");
-  $ptext = implode('', @$_POST);
+  $ptext = implode(' ', @$_POST);
   if (@$ptext) Blocklist($pagename, $ptext); 
   StopWatch("CheckBlocklist: end $pagename");
 }
